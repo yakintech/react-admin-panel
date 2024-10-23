@@ -23,6 +23,9 @@ function List() {
 
 
     return <>
+        <hr />
+        <Link to={`/products/add`}>Add</Link>
+        <hr />
         {
             loading ? <h1>loading...</h1> :
                 <table>

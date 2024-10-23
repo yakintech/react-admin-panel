@@ -4,4 +4,5 @@ export interface Product {
     unitsInStock?: number,
     unitPrice?: number,
     quantityPerUnit?: string
+    categoryId?: number
 }
