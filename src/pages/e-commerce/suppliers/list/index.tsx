@@ -30,7 +30,7 @@ function List() {
                                 <td>{p.companyName?.toUpperCase()}</td>
                                 <td>{p.contactName}</td>
                                 <td>{p.contactTitle}</td>
-                                <td><a href={`/e-commerce/suppliers/${p.id}`}>Detail</a></td>
+                                <td><a href={`/suppliers/${p.id}`}>Detail</a></td>
                             </tr>
                         )}
                     </tbody>
