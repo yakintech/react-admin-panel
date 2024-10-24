@@ -6,6 +6,8 @@ import { DataGrid, GridColDef, GridToolbar } from '@mui/x-data-grid'
 import { Button } from '@mui/material'
 import { trTR } from '@mui/x-data-grid/locales';
 import { FavoritesContext } from '../../../../context/FavoritesContext'
+import axios from 'axios'
+import { getTokenFromLocalStorage } from '../../../../utils/tokenStorage'
 
 function List() {
 
@@ -18,7 +20,12 @@ function List() {
     const { favOperation, hasFavorite } = useContext(FavoritesContext)
 
     useEffect(() => {
-        axiosInstance.get<Product[]>("products")
+        let token = getTokenFromLocalStorage()
+        axios.get<Product[]>("http://localhost:8080/api/products", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
             .then(res => {
                 setproducts(res.data)
                 setloading(false)
@@ -90,13 +97,13 @@ function List() {
             field: "Favorite",
             headerName: "Favorite",
             flex: 2,
-            renderCell: (params : any) => {
-                if(params.row.unitPrice > 0 ){
+            renderCell: (params: any) => {
+                if (params.row.unitPrice > 0) {
                     return <Button variant="contained" onClick={() => favOperation(params.row)} color="primary">
-                    {hasFavorite(params.row) ? "Remove from Fav" : "Add to Fav"}
-                </Button>
+                        {hasFavorite(params.row) ? "Remove from Fav" : "Add to Fav"}
+                    </Button>
                 }
-                else{
+                else {
                     return <></>
                 }
             }
