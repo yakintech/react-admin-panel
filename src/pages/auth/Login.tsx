@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useContext, useState } from 'react'
-import { setTokentoLocalStorage } from '../../utils/tokenStorage'
+import { setRefreshTokenToLocalStorage, setTokentoLocalStorage } from '../../utils/tokenStorage'
 import { UserContext } from '../../context/UserContext'
 
 function Login() {
@@ -16,6 +16,7 @@ function Login() {
             .then(response => {
                 let token = response.data.token
                 setTokentoLocalStorage(token)
+                setRefreshTokenToLocalStorage(response.data.refreshToken)
                 setloginStatus(true)
             })
     }

@@ -8,6 +8,7 @@ import { trTR } from '@mui/x-data-grid/locales';
 import { FavoritesContext } from '../../../../context/FavoritesContext'
 import axios from 'axios'
 import { getTokenFromLocalStorage } from '../../../../utils/tokenStorage'
+import { baseService } from '../../../../api/baseService'
 
 function List() {
 
@@ -20,14 +21,9 @@ function List() {
     const { favOperation, hasFavorite } = useContext(FavoritesContext)
 
     useEffect(() => {
-        let token = getTokenFromLocalStorage()
-        axios.get<Product[]>("http://localhost:8080/api/products", {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-            .then(res => {
-                setproducts(res.data)
+        baseService.getAll("products")
+            .then(data => {
+                setproducts(data)
                 setloading(false)
             })
             .catch(err => {

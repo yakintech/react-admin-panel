@@ -15,3 +15,26 @@ export const getTokenFromLocalStorage = () => {
     }
     return null
 }
+
+export const removeTokenFromLocalStorage = () => {
+    localStorage.removeItem("token")
+}
+
+
+export const setRefreshTokenToLocalStorage = (refreshToken: string) => {
+    const encryptedToken = AES.encrypt(refreshToken, "refreshTokenSecretKey" as string).toString()  
+    localStorage.setItem("refreshToken", encryptedToken)
+}
+
+export const getRefreshTokenFromLocalStorage = () => {
+    const encryptedToken = localStorage.getItem("refreshToken")
+    if (encryptedToken) {
+        const token = AES.decrypt(encryptedToken, "refreshTokenSecretKey" as string).toString(enc.Utf8)
+        return token
+    }
+    return null
+}
+
+export const removeRefreshTokenFromLocalStorage = () => {
+    localStorage.removeItem("refreshToken")
+}
