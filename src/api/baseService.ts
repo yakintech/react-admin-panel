@@ -1,7 +1,7 @@
 import axios from "axios"
 import { getRefreshTokenFromLocalStorage, getTokenFromLocalStorage, removeTokenFromLocalStorage, setTokentoLocalStorage } from "../utils/tokenStorage"
 
-const BASE_URL = "http://localhost:8080/api/"
+const BASE_URL = process.env.REACT_APP_API_URL
 
 export const baseService = {
     getAll: async (url: string) => {

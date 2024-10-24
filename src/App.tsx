@@ -3,17 +3,25 @@ import CategoryRoutes from './pages/e-commerce/categories'
 import ProductRoutes from './pages/e-commerce/products'
 import SuppliersRoutes from './pages/e-commerce/suppliers'
 import OrdersRoutes from './pages/e-commerce/orders'
-import { Container } from '@mui/material'
+import { Button, Container } from '@mui/material'
 import Favorites from './pages/e-commerce/products/list/Favorites'
 import { useContext, useState } from 'react'
 import { FavoritesContext } from './context/FavoritesContext'
 import Login from './pages/auth/Login'
 import { UserContext } from './context/UserContext'
+import { removeRefreshTokenFromLocalStorage, removeTokenFromLocalStorage } from './utils/tokenStorage'
 
 function App() {
 
   const { favorites } = useContext(FavoritesContext)
-  const { loginStatus, loading } = useContext(UserContext)
+  const { loginStatus, loading, setloginStatus } = useContext(UserContext)
+
+
+  const logout = () => {
+    removeTokenFromLocalStorage()
+    removeRefreshTokenFromLocalStorage()
+    setloginStatus(false)
+  }
 
   return <>
     {
@@ -23,6 +31,7 @@ function App() {
         <li><Link to={"/favorites"}>Favorites <span style={{ color: 'red' }}>({favorites.length})</span></Link></li>
         <li><Link to={"/suppliers"}>Suppliers</Link></li>
         <li><Link to={"/orders"}>Orders</Link></li>
+        <Button onClick={logout} variant="contained">Logout</Button>
       </ul>
         <hr />
         <Container>
