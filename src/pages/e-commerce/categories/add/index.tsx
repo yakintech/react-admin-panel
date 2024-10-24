@@ -1,7 +1,8 @@
 import axios from 'axios'
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import { ECOMMERCE_API_URL } from '../../../../config/api'
 import { useNavigate } from 'react-router-dom'
+import { Button } from '@mui/material'
 
 function Add() {
 
@@ -35,7 +36,7 @@ function Add() {
       <input type='text' onChange={(e) => setdescription(e.target.value)} />
     </div>
     <div>
-      <button onClick={add}>Add</button>
+      <Button color="success" variant="contained" onClick={add}>Add</Button>
     </div>
   </>
 }

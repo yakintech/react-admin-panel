@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+import { FavoritesProvider } from './context/FavoritesContext';
 
 
 const root = ReactDOM.createRoot(
@@ -8,7 +9,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <BrowserRouter>
-    <App/>
+    <FavoritesProvider>
+      <App />
+    </FavoritesProvider>
   </BrowserRouter>
 );
 
