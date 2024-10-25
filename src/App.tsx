@@ -15,6 +15,7 @@ import Home from './pages/e-commerce/home'
 import Parent from './pages/sample/memorize/Parent'
 import { useTranslation } from 'react-i18next'
 
+
 function App() {
 
   const { favorites } = useContext(FavoritesContext)
@@ -41,7 +42,10 @@ function App() {
     dispatch({ type: "cart/load" })
   }, [])
 
+  let url = process.env.REACT_APP_API_URL
+
   return <>
+  <h1>Url: {url}</h1>
   <select onChange={(e) => changeLanguage(e.target.value)}>
     <option value="en">English</option>
     <option value="ar">Arabic</option>
