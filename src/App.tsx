@@ -5,12 +5,12 @@ import SuppliersRoutes from './pages/e-commerce/suppliers'
 import OrdersRoutes from './pages/e-commerce/orders'
 import { Button, Container } from '@mui/material'
 import Favorites from './pages/e-commerce/products/list/Favorites'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FavoritesContext } from './context/FavoritesContext'
 import Login from './pages/auth/Login'
 import { UserContext } from './context/UserContext'
 import { removeRefreshTokenFromLocalStorage, removeTokenFromLocalStorage } from './utils/tokenStorage'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 function App() {
 
@@ -25,6 +25,12 @@ function App() {
     removeRefreshTokenFromLocalStorage()
     setloginStatus(false)
   }
+
+  let dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: "cart/load" })
+  }, [])
 
   return <>
     {

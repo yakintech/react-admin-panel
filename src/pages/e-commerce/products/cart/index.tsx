@@ -12,7 +12,6 @@ function Cart() {
         totalPrice += product.price * product.quantity
     })
 
-
     const dispatch = useDispatch()
 
     return <>
