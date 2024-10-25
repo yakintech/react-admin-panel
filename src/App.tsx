@@ -11,6 +11,8 @@ import Login from './pages/auth/Login'
 import { UserContext } from './context/UserContext'
 import { removeRefreshTokenFromLocalStorage, removeTokenFromLocalStorage } from './utils/tokenStorage'
 import { useDispatch, useSelector } from 'react-redux'
+import Home from './pages/e-commerce/home'
+import Parent from './pages/sample/memorize/Parent'
 
 function App() {
 
@@ -35,12 +37,14 @@ function App() {
   return <>
     {
       loading ? <h1>loading...</h1> : loginStatus == true ? <> <ul style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <li><Link to={"/"}>Home</Link></li>
         <li><Link to={"/categories"}>Categories</Link></li>
         <li><Link to={"/products"}>Products</Link></li>
         <li><Link to={"/favorites"}>Favorites <span style={{ color: 'red' }}>({favorites.length})</span></Link></li>
         <li><Link to={"/suppliers"}>Suppliers</Link></li>
         <li><Link to={"/orders"}>Orders</Link></li>
         <li><Link to={"/products/cart"}>Cart <span style={{color:"red"}}>({cart.items.length})</span></Link></li>
+        <li><Link to={"/parent"}>Parent</Link></li>
         <Button onClick={logout} variant="contained">Logout</Button>
       </ul>
         <hr />
@@ -51,6 +55,8 @@ function App() {
             <Route path='/suppliers/*' element={<SuppliersRoutes />} />
             <Route path='/orders/*' element={<OrdersRoutes />} />
             <Route path='/favorites/*' element={<Favorites />} />
+            <Route path='/parent' element={<Parent />} />
+            <Route path='/' element={<Home/>} />
           </Routes>
         </Container>
 
@@ -61,9 +67,6 @@ function App() {
 
 export default App
 
-
-//React memorizes
-//Unit testing
 //multi language
 //other hooks
 //wrapping components
