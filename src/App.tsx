@@ -13,6 +13,7 @@ import { removeRefreshTokenFromLocalStorage, removeTokenFromLocalStorage } from 
 import { useDispatch, useSelector } from 'react-redux'
 import Home from './pages/e-commerce/home'
 import Parent from './pages/sample/memorize/Parent'
+import { useTranslation } from 'react-i18next'
 
 function App() {
 
@@ -20,6 +21,12 @@ function App() {
   const { loginStatus, loading, setloginStatus } = useContext(UserContext)
 
   const { cart } = useSelector((state: any) => state)
+
+  const { t, i18n } = useTranslation()
+
+  const changeLanguage = (lng: string) => {
+    i18n.changeLanguage(lng)
+  }
 
 
   const logout = () => {
@@ -35,16 +42,23 @@ function App() {
   }, [])
 
   return <>
+  <select onChange={(e) => changeLanguage(e.target.value)}>
+    <option value="en">English</option>
+    <option value="ar">Arabic</option>
+    <option value="gr">Greek</option>
+    <option value="tr">Turkish</option>
+  </select>
+
     {
       loading ? <h1>loading...</h1> : loginStatus == true ? <> <ul style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <li><Link to={"/"}>Home</Link></li>
-        <li><Link to={"/categories"}>Categories</Link></li>
-        <li><Link to={"/products"}>Products</Link></li>
-        <li><Link to={"/favorites"}>Favorites <span style={{ color: 'red' }}>({favorites.length})</span></Link></li>
-        <li><Link to={"/suppliers"}>Suppliers</Link></li>
-        <li><Link to={"/orders"}>Orders</Link></li>
-        <li><Link to={"/products/cart"}>Cart <span style={{color:"red"}}>({cart.items.length})</span></Link></li>
-        <li><Link to={"/parent"}>Parent</Link></li>
+        <li><Link to={"/"}>{t("home")}</Link></li>
+        <li><Link to={"/categories"}>{t("categories")}</Link></li>
+        <li><Link to={"/products"}>{t("products")}</Link></li>
+        <li><Link to={"/favorites"}>{t("favorites")} <span style={{ color: 'red' }}>({favorites.length})</span></Link></li>
+        <li><Link to={"/suppliers"}>{t("suppliers")}</Link></li>
+        <li><Link to={"/orders"}>{t("orders")}</Link></li>
+        <li><Link to={"/products/cart"}>{t("cart")} <span style={{ color: "red" }}>({cart.items.length})</span></Link></li>
+        <li><Link to={"/parent"}>{t("parent")}</Link></li>
         <Button onClick={logout} variant="contained">Logout</Button>
       </ul>
         <hr />
@@ -56,7 +70,7 @@ function App() {
             <Route path='/orders/*' element={<OrdersRoutes />} />
             <Route path='/favorites/*' element={<Favorites />} />
             <Route path='/parent' element={<Parent />} />
-            <Route path='/' element={<Home/>} />
+            <Route path='/' element={<Home />} />
           </Routes>
         </Container>
 
@@ -66,7 +80,3 @@ function App() {
 }
 
 export default App
-
-//multi language
-//other hooks
-//wrapping components

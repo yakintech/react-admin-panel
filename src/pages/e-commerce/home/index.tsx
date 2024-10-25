@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+
 function Home() {
 
     const [cities, setcities] = useState(["Istanbul", "Ankara", "Izmir", "Antalya", "Bursa", "Adana", "Konya", "Gaziantep", "Mersin", "Diyarbakir"]);

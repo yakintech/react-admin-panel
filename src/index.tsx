@@ -6,6 +6,7 @@ import { UserContextProvider } from './context/UserContext';
 import { configureStore } from '@reduxjs/toolkit';
 import CartReducer from './store/slices/CartSlice';
 import { Provider } from 'react-redux';
+import './i18n.ts'
 
 
 const root = ReactDOM.createRoot(
