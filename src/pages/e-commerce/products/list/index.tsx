@@ -9,6 +9,8 @@ import { FavoritesContext } from '../../../../context/FavoritesContext'
 import axios from 'axios'
 import { getTokenFromLocalStorage } from '../../../../utils/tokenStorage'
 import { baseService } from '../../../../api/baseService'
+import { useDispatch } from 'react-redux'
+import { CartItem } from '../../../../store/slices/CartSlice'
 
 function List() {
 
@@ -45,6 +47,19 @@ function List() {
                 })
         }
 
+    }
+
+    const dispatch = useDispatch()
+
+    const add = (item: any) => {
+        
+        let cartItem : CartItem = {
+            id: item.id,
+            name: item.name,
+            price: item.unitPrice,
+            quantity: 1
+        }
+        dispatch({ type: 'cart/addToCart', payload: cartItem })
     }
 
     const columns: GridColDef[] = [
@@ -102,6 +117,14 @@ function List() {
                 else {
                     return <></>
                 }
+            }
+        },
+        {
+            field: "AddtoCart",
+            headerName: "Add to Cart",
+            flex: 2,
+            renderCell: (params: any) => {
+                return <Button variant="contained" color="primary" onClick={() => add(params.row)}>Add to Cart</Button>
             }
         }
     ]

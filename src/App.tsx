@@ -10,11 +10,14 @@ import { FavoritesContext } from './context/FavoritesContext'
 import Login from './pages/auth/Login'
 import { UserContext } from './context/UserContext'
 import { removeRefreshTokenFromLocalStorage, removeTokenFromLocalStorage } from './utils/tokenStorage'
+import { useSelector } from 'react-redux'
 
 function App() {
 
   const { favorites } = useContext(FavoritesContext)
   const { loginStatus, loading, setloginStatus } = useContext(UserContext)
+
+  const { cart } = useSelector((state: any) => state)
 
 
   const logout = () => {
@@ -31,6 +34,7 @@ function App() {
         <li><Link to={"/favorites"}>Favorites <span style={{ color: 'red' }}>({favorites.length})</span></Link></li>
         <li><Link to={"/suppliers"}>Suppliers</Link></li>
         <li><Link to={"/orders"}>Orders</Link></li>
+        <li><Link to={"/products/cart"}>Cart <span style={{color:"red"}}>({cart.items.length})</span></Link></li>
         <Button onClick={logout} variant="contained">Logout</Button>
       </ul>
         <hr />
@@ -50,3 +54,10 @@ function App() {
 }
 
 export default App
+
+
+//React memorizes
+//Unit testing
+//multi language
+//other hooks
+//wrapping components

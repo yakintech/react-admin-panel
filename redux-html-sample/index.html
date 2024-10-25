@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.7.2/redux.js"
+        integrity="sha512-Aos29jYB5z9MEHRA4Mxu4pJooerMzN17qU+wpHBt9UOBDy3Z3BPETC9JmRijTPeWjy33EilZbQn0hVXaEkSiaw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+
+    <h1>Counter: <span id="title">0</span></h1>
+
+    <button id="increase">Increase</button>
+    <button id="decrease">Decrease</button>
+</body>
+<script>
+
+   
+
+    function counterReducers(state = 0, action) {
+        switch (action.type) {
+            case 'increase':
+                return state + 1;
+            case 'decrease':
+                return state - 1;
+            default:
+                return state;
+        }
+    }
+
+    const store = Redux.createStore(counterReducers);
+
+
+    function render() {
+        document.getElementById('title').innerText = store.getState();
+    }
+
+    function render2(){
+        console.log('render2');
+    }
+
+
+    store.subscribe(render);
+    store.subscribe(render2);
+
+    document.getElementById('increase').addEventListener('click', () => {
+        store.dispatch({ type: 'increase' });
+    });
+
+    document.getElementById('decrease').addEventListener('click', () => {
+        store.dispatch({ type: 'decrease' });
+    });
+</script>
+
+</html>
